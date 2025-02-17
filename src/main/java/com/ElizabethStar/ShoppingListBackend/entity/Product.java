@@ -8,9 +8,8 @@ import java.util.Calendar;
 
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
+@NoArgsConstructor
 @Table(name="products")
 public class Product {
     @Id
@@ -21,4 +20,22 @@ public class Product {
     private Double  price;
     private Calendar date;
 
+    public Product(String name, Integer numberOfPieces, Double price, Calendar date)
+    {
+        this.name=name;
+        this.numberOfPieces=numberOfPieces;
+        this.price=price;
+        this.date=date;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", numberOfPieces=" + numberOfPieces +
+                ", price=" + price +
+                ", date=" + date +
+                '}';
+    }
 }
