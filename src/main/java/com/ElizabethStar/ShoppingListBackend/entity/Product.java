@@ -1,7 +1,10 @@
 package com.ElizabethStar.ShoppingListBackend.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.Calendar;
 
@@ -10,6 +13,7 @@ import java.util.Calendar;
 @Setter
 @Entity
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(name="products")
 public class Product {
     @Id
@@ -38,4 +42,6 @@ public class Product {
                 ", date=" + date +
                 '}';
     }
+
+
 }

@@ -1,5 +1,7 @@
 package com.ElizabethStar.ShoppingListBackend.controllers;
 
+import com.ElizabethStar.ShoppingListBackend.dto.ProductDto;
+import com.ElizabethStar.ShoppingListBackend.mapper.ProductMapper;
 import com.ElizabethStar.ShoppingListBackend.repository.ProductRepository;
 import com.ElizabethStar.ShoppingListBackend.services.ProductService;
 import com.ElizabethStar.ShoppingListBackend.entity.Product;
@@ -29,8 +31,8 @@ public class MainController {
     }
 
     @PostMapping("/products")
-    public void addProduct(@RequestBody Product product) {
-
+    public void addProduct(@RequestBody ProductDto productDto) {
+        productService.addProduct(ProductMapper.mapToProduct(productDto));
     }
 
     @DeleteMapping("/products/{id}")
