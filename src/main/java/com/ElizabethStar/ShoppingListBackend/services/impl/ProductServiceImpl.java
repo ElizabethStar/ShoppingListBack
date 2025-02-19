@@ -6,6 +6,7 @@ import com.ElizabethStar.ShoppingListBackend.services.ProductService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Calendar;
 import java.util.List;
 
 @Service
@@ -20,7 +21,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> GiveShoppingList() {
+    public List<Product> GiveAllShoppingList() {
         return productRepository.findAll();
     }
 
@@ -28,4 +29,5 @@ public class ProductServiceImpl implements ProductService {
     public void addProduct(Product product) {
         productRepository.save(product);
     }
+
 }

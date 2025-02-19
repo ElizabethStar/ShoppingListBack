@@ -5,7 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.Calendar;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -15,5 +17,5 @@ public class ProductDto {
     private String name;
     private Integer numberOfPieces;
     private Double  price;
-    private Calendar date;
+    private LocalDate date;
 }
