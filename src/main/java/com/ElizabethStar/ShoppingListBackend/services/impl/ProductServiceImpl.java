@@ -6,6 +6,7 @@ import com.ElizabethStar.ShoppingListBackend.services.ProductService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.List;
 
@@ -28,6 +29,20 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void addProduct(Product product) {
         productRepository.save(product);
+    }
+
+    @Override
+    public double giveTotalPrice(List<Product> products) {
+        double total=0;
+        for (Product product: products){
+            total+=product.getPrice()*product.getNumberOfPieces();
+        }
+        return  total;
+    }
+
+    @Override
+    public List<Product> GiveShoppingListByDate(LocalDate date) {
+        return productRepository.findByDate(date);
     }
 
 }

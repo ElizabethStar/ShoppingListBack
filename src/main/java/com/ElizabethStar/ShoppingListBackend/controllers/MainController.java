@@ -1,6 +1,8 @@
 package com.ElizabethStar.ShoppingListBackend.controllers;
 
+import ch.qos.logback.core.model.Model;
 import com.ElizabethStar.ShoppingListBackend.dto.ProductDto;
+import com.ElizabethStar.ShoppingListBackend.dto.ProductListAndTotalDto;
 import com.ElizabethStar.ShoppingListBackend.mapper.ProductMapper;
 import com.ElizabethStar.ShoppingListBackend.repository.ProductRepository;
 import com.ElizabethStar.ShoppingListBackend.services.ProductService;
@@ -8,11 +10,8 @@ import com.ElizabethStar.ShoppingListBackend.entity.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.text.SimpleDateFormat;
+
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -30,23 +29,23 @@ public class MainController {
 
 
     @GetMapping("/products")
-    public List<Product> GiveShoppingList(@RequestParam String selectedDate) {
+    public ProductListAndTotalDto GiveShoppingList(@RequestParam String selectedDate) {
         //return productService.GiveAllShoppingList();
+
         if (!Objects.equals(selectedDate, "notSelected")) {
             LocalDate date = LocalDate.parse(selectedDate);
-            return productRepository.findByDate(date);
+            List<Product> productList = productService.GiveShoppingListByDate(date);
+            ProductListAndTotalDto productListAndTotalDto = new ProductListAndTotalDto(productList,
+                    productService.giveTotalPrice(productList));
+            return productListAndTotalDto;
         }
-        return productService.GiveAllShoppingList();
+        List<Product> productList = productService.GiveAllShoppingList();
+        ProductListAndTotalDto productListAndTotalDto = new ProductListAndTotalDto(productList,
+                productService.giveTotalPrice(productList));
+        return productListAndTotalDto;
 
     }
 
-//    @GetMapping("/products")
-//    public List<Product> GiveShoppingList() {
-//        //return productService.GiveAllShoppingList();
-//
-//        return productService.GiveAllShoppingList();
-//
-//    }
 
 
 
