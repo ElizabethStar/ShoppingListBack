@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.Objects;
 
@@ -33,11 +34,16 @@ public class MainController {
         //return productService.GiveAllShoppingList();
 
         if (!Objects.equals(selectedDate, "notSelected")) {
-            LocalDate date = LocalDate.parse(selectedDate);
-            List<Product> productList = productService.GiveShoppingListByDate(date);
-            ProductListAndTotalDto productListAndTotalDto = new ProductListAndTotalDto(productList,
-                    productService.giveTotalPrice(productList));
-            return productListAndTotalDto;
+            try {
+                LocalDate date = LocalDate.parse(selectedDate);
+                List<Product> productList = productService.GiveShoppingListByDate(date);
+                ProductListAndTotalDto productListAndTotalDto = new ProductListAndTotalDto(productList,
+                        productService.giveTotalPrice(productList));
+                return productListAndTotalDto;
+            }
+            catch (DateTimeParseException e){
+                System.out.println(e.getMessage());
+            }
         }
         List<Product> productList = productService.GiveAllShoppingList();
         ProductListAndTotalDto productListAndTotalDto = new ProductListAndTotalDto(productList,
