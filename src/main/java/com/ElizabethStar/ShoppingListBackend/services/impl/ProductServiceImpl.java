@@ -30,14 +30,6 @@ public class ProductServiceImpl implements ProductService {
         productRepository.save(product);
     }
 
-    @Override
-    public double giveTotalPrice(List<Product> products) {
-        double total=0;
-        for (Product product: products){
-            total+=product.getPrice()*product.getNumberOfPieces();
-        }
-        return  total;
-    }
 
     @Override
     public List<Product> GiveShoppingListByDate(LocalDate date) {

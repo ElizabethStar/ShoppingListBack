@@ -9,7 +9,6 @@ public interface ProductService {
     void deleteProduct(Long id);
     List<Product> GiveAllShoppingList();
     void addProduct(Product product);
-    double giveTotalPrice(List<Product> products);
     List<Product> GiveShoppingListByDate(LocalDate date);
 
 }

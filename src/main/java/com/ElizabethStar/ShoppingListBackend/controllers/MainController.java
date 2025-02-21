@@ -7,6 +7,7 @@ import com.ElizabethStar.ShoppingListBackend.exception.ProductDateException;
 import com.ElizabethStar.ShoppingListBackend.exception.ProductNameException;
 import com.ElizabethStar.ShoppingListBackend.exception.ProductNumberOfPiecesException;
 import com.ElizabethStar.ShoppingListBackend.exception.ProductPriceException;
+import com.ElizabethStar.ShoppingListBackend.mapper.ProductListAndTotalMapper;
 import com.ElizabethStar.ShoppingListBackend.mapper.ProductMapper;
 import com.ElizabethStar.ShoppingListBackend.repository.ProductRepository;
 import com.ElizabethStar.ShoppingListBackend.services.ProductService;
@@ -40,19 +41,13 @@ public class MainController {
         if (!Objects.equals(selectedDate, "notSelected")) {
             try {
                 LocalDate date = LocalDate.parse(selectedDate);
-                List<Product> productList = productService.GiveShoppingListByDate(date);
-                ProductListAndTotalDto productListAndTotalDto = new ProductListAndTotalDto(productList,
-                        productService.giveTotalPrice(productList));
-                return productListAndTotalDto;
+                return ProductListAndTotalMapper.mapToProductListAndTotalDto(productService.GiveShoppingListByDate(date));
             }
             catch (DateTimeParseException e){
                 System.out.println(e.getMessage());
             }
         }
-        List<Product> productList = productService.GiveAllShoppingList();
-        ProductListAndTotalDto productListAndTotalDto = new ProductListAndTotalDto(productList,
-                productService.giveTotalPrice(productList));
-        return productListAndTotalDto;
+        return ProductListAndTotalMapper.mapToProductListAndTotalDto(productService.GiveAllShoppingList());
 
     }
 
