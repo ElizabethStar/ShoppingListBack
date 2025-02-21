@@ -3,7 +3,6 @@ package com.ElizabethStar.ShoppingListBackend.services;
 import com.ElizabethStar.ShoppingListBackend.entity.Product;
 
 import java.time.LocalDate;
-import java.util.Calendar;
 import java.util.List;
 
 public interface ProductService {

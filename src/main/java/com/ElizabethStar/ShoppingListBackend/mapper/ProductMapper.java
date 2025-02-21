@@ -2,6 +2,10 @@ package com.ElizabethStar.ShoppingListBackend.mapper;
 
 import com.ElizabethStar.ShoppingListBackend.dto.ProductDto;
 import com.ElizabethStar.ShoppingListBackend.entity.Product;
+import com.ElizabethStar.ShoppingListBackend.exception.ProductDateException;
+import com.ElizabethStar.ShoppingListBackend.exception.ProductNameException;
+import com.ElizabethStar.ShoppingListBackend.exception.ProductNumberOfPiecesException;
+import com.ElizabethStar.ShoppingListBackend.exception.ProductPriceException;
 
 public class ProductMapper {
    public static ProductDto mapToProductDto(Product product){
@@ -15,7 +19,8 @@ public class ProductMapper {
        );
    }
 
-   public static Product mapToProduct(ProductDto productDto) {
+   public static Product mapToProduct(ProductDto productDto) throws ProductPriceException, ProductNumberOfPiecesException, ProductNameException, ProductDateException {
+
        return new Product(
                productDto.getName(),
                productDto.getNumberOfPieces(),

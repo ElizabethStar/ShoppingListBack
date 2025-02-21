@@ -1,8 +1,12 @@
 package com.ElizabethStar.ShoppingListBackend.controllers;
 
-import ch.qos.logback.core.model.Model;
+
 import com.ElizabethStar.ShoppingListBackend.dto.ProductDto;
 import com.ElizabethStar.ShoppingListBackend.dto.ProductListAndTotalDto;
+import com.ElizabethStar.ShoppingListBackend.exception.ProductDateException;
+import com.ElizabethStar.ShoppingListBackend.exception.ProductNameException;
+import com.ElizabethStar.ShoppingListBackend.exception.ProductNumberOfPiecesException;
+import com.ElizabethStar.ShoppingListBackend.exception.ProductPriceException;
 import com.ElizabethStar.ShoppingListBackend.mapper.ProductMapper;
 import com.ElizabethStar.ShoppingListBackend.repository.ProductRepository;
 import com.ElizabethStar.ShoppingListBackend.services.ProductService;
@@ -57,7 +61,12 @@ public class MainController {
 
     @PostMapping("/products")
     public void addProduct(@RequestBody ProductDto productDto) {
-        productService.addProduct(ProductMapper.mapToProduct(productDto));
+        try {
+            productService.addProduct(ProductMapper.mapToProduct(productDto));
+        } catch (ProductPriceException | ProductNumberOfPiecesException | ProductNameException | ProductDateException e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 
     @DeleteMapping("/products/{id}")
