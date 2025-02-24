@@ -9,16 +9,13 @@ import com.ElizabethStar.ShoppingListBackend.exception.ProductNumberOfPiecesExce
 import com.ElizabethStar.ShoppingListBackend.exception.ProductPriceException;
 import com.ElizabethStar.ShoppingListBackend.mapper.ProductListAndTotalMapper;
 import com.ElizabethStar.ShoppingListBackend.mapper.ProductMapper;
-import com.ElizabethStar.ShoppingListBackend.repository.ProductRepository;
 import com.ElizabethStar.ShoppingListBackend.services.ProductService;
-import com.ElizabethStar.ShoppingListBackend.entity.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.List;
 import java.util.Objects;
 
 
@@ -28,15 +25,10 @@ public class MainController {
 
     @Autowired
     private ProductService productService;
-    @Autowired
-    private ProductRepository productRepository;
-
-
 
 
     @GetMapping("/products")
     public ProductListAndTotalDto GiveShoppingList(@RequestParam String selectedDate) {
-        //return productService.GiveAllShoppingList();
 
         if (!Objects.equals(selectedDate, "notSelected")) {
             try {
@@ -50,8 +42,6 @@ public class MainController {
         return ProductListAndTotalMapper.mapToProductListAndTotalDto(productService.GiveAllShoppingList());
 
     }
-
-
 
 
     @PostMapping("/products")
