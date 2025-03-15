@@ -1,0 +1,28 @@
+version: '3.9'
+
+services:
+  app:
+    image: '141cf30fb02f'
+    container_name: app
+    environment:
+      - DB_USER=person
+      - DB_PASSWORD=1234567
+      - DB_URL=jdbc:postgresql://db:5432/postgres
+    expose:
+      - '8080'
+    ports:
+      - '8080:8080'
+    depends_on:
+      - db
+
+  db:
+    image: 'postgres'
+    container_name: db
+    volumes:
+      - productdata:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=person
+      - POSTGRES_PASSWORD=1234567
+
+volumes:
+  productdata:
